@@ -32,7 +32,7 @@
         "symfony/stimulus-bundle": "^2.12",
         "symfony/string": "^8",
         "symfony/translation": "^8",
-        "symfony/twig-bundle": "^8",
+        "symfony/twig-bundle": "8.0.*",
         "symfony/ux-icons": "^2.20",
         "symfony/ux-live-component": "^2.6",
         "symfony/validator": "^8",
@@ -41,7 +41,8 @@
         "twbs/bootstrap": "^5",
         "twig/extra-bundle": "^3.3",
         "twig/intl-extra": "^3.3",
-        "twig/markdown-extra": "^3.3"
+        "twig/markdown-extra": "^3.3",
+        "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {
         "dama/doctrine-test-bundle": "^8.0.2",
