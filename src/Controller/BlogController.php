@@ -11,34 +11,34 @@
 
 namespace App\Controller;
 
-use App\Entity\Comment;
-use App\Entity\Post;
-use App\Entity\User;
-use App\Event\CommentCreatedEvent;
-use App\Form\CommentType;
-use App\Repository\PostRepository;
-use App\Repository\TagRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bridge\Doctrine\Attribute\MapEntity;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Attribute\Cache;
-use Symfony\Component\Routing\Attribute\Route;
-use Symfony\Component\Routing\Requirement\Requirement;
-use Symfony\Component\Security\Http\Attribute\CurrentUser;
-use Symfony\Component\Security\Http\Attribute\IsGranted;
+ use App\Entity\Comment;
+ use App\Entity\Post;
+ use App\Entity\User;
+ use App\Event\CommentCreatedEvent;
+ use App\Form\CommentType;
+ use App\Repository\PostRepository;
+ use App\Repository\TagRepository;
+ use Doctrine\ORM\EntityManagerInterface;
+ use Symfony\Bridge\Doctrine\Attribute\MapEntity;
+ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
+ use Symfony\Component\HttpFoundation\Request;
+ use Symfony\Component\HttpFoundation\Response;
+ use Symfony\Component\HttpKernel\Attribute\Cache;
+ use Symfony\Component\Routing\Attribute\Route;
+ use Symfony\Component\Routing\Requirement\Requirement;
+ use Symfony\Component\Security\Http\Attribute\CurrentUser;
+ use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-/**
+ /**
  * Controller used to manage blog contents in the public part of the site.
  *
  * @author Ryan Weaver <weaverryan@gmail.com>
  * @author Javier Eguiluz <javier.eguiluz@gmail.com>
  */
-#[Route('/blog')]
-final class BlogController extends AbstractController
-{
+ #[Route('/blog')]
+ final class BlogController extends AbstractController
+ {
     /**
      * NOTE: For standard formats, Symfony will also automatically choose the best
      * Content-Type header for the response.
