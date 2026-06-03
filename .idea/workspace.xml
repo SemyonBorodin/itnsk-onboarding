@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8fe808ae-0d5c-4156-a55f-cd7c3e11832a" name="Changes" comment="symfony documentation: service fetching на примере логгера, ProductController, Entity, Repository">
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/reference.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/reference.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProductController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/ProductController.php" afterDir="false" />
+    <list default="true" id="8fe808ae-0d5c-4156-a55f-cd7c3e11832a" name="Changes" comment="symfony documentation: Flash с сообщением о успешном добавлении product">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/data/database.sqlite" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/Product.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/Product.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/new.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -223,7 +223,7 @@
       <workItem from="1780386813224" duration="1553000" />
       <workItem from="1780388461489" duration="2200000" />
       <workItem from="1780390687617" duration="8749000" />
-      <workItem from="1780461888278" duration="5683000" />
+      <workItem from="1780461888278" duration="9940000" />
     </task>
     <task id="LOCAL-00001" summary="setup and lucky page from 'creating pages' from symfony documentation: LuckyController and twig template">
       <option name="closed" value="true" />
@@ -257,7 +257,23 @@
       <option name="project" value="LOCAL" />
       <updated>1780477893704</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="symfony documentation: MapQueryString пример">
+      <option name="closed" value="true" />
+      <created>1780479484823</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1780479484823</updated>
+    </task>
+    <task id="LOCAL-00006" summary="symfony documentation: Flash с сообщением о успешном добавлении product">
+      <option name="closed" value="true" />
+      <created>1780481126168</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1780481126169</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -268,6 +284,8 @@
     <MESSAGE value="symfony documentation: routing" />
     <MESSAGE value="symfony documentation: redirect с помощью хелпера симфони" />
     <MESSAGE value="symfony documentation: service fetching на примере логгера, ProductController, Entity, Repository" />
-    <option name="LAST_COMMIT_MESSAGE" value="symfony documentation: service fetching на примере логгера, ProductController, Entity, Repository" />
+    <MESSAGE value="symfony documentation: MapQueryString пример" />
+    <MESSAGE value="symfony documentation: Flash с сообщением о успешном добавлении product" />
+    <option name="LAST_COMMIT_MESSAGE" value="symfony documentation: Flash с сообщением о успешном добавлении product" />
   </component>
 </project>

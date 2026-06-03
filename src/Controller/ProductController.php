@@ -53,6 +53,7 @@ final class ProductController extends AbstractController
         return $this->render('product/new.html.twig', [
             'product' => $product,
             'form' => $form,
+            'submittedProductName' => $form->isSubmitted() ? $product->getName() : null,
         ]);
     }
 
