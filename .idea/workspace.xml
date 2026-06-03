@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8fe808ae-0d5c-4156-a55f-cd7c3e11832a" name="Changes" comment="symfony documentation: input validation и flash_message, if-проверка в twig-шаблоне добавление нового product">
+    <list default="true" id="8fe808ae-0d5c-4156-a55f-cd7c3e11832a" name="Changes" comment="symfony documentation: if-условия в twig-шаблонах, фильтры upper и length">
       <change beforePath="$PROJECT_DIR$/data/database.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/data/database.sqlite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/product/new.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/new.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Twig/AppExtension.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Twig/AppExtension.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/product/index.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/product/index.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -221,7 +222,7 @@
       <workItem from="1780386813224" duration="1553000" />
       <workItem from="1780388461489" duration="2200000" />
       <workItem from="1780390687617" duration="8749000" />
-      <workItem from="1780461888278" duration="10689000" />
+      <workItem from="1780461888278" duration="11562000" />
     </task>
     <task id="LOCAL-00001" summary="setup and lucky page from 'creating pages' from symfony documentation: LuckyController and twig template">
       <option name="closed" value="true" />
@@ -279,7 +280,15 @@
       <option name="project" value="LOCAL" />
       <updated>1780485297930</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="symfony documentation: if-условия в twig-шаблонах, фильтры upper и length">
+      <option name="closed" value="true" />
+      <created>1780485759054</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1780485759054</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -293,6 +302,7 @@
     <MESSAGE value="symfony documentation: MapQueryString пример" />
     <MESSAGE value="symfony documentation: Flash с сообщением о успешном добавлении product" />
     <MESSAGE value="symfony documentation: input validation и flash_message, if-проверка в twig-шаблоне добавление нового product" />
-    <option name="LAST_COMMIT_MESSAGE" value="symfony documentation: input validation и flash_message, if-проверка в twig-шаблоне добавление нового product" />
+    <MESSAGE value="symfony documentation: if-условия в twig-шаблонах, фильтры upper и length" />
+    <option name="LAST_COMMIT_MESSAGE" value="symfony documentation: if-условия в twig-шаблонах, фильтры upper и length" />
   </component>
 </project>

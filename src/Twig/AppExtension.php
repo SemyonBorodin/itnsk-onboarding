@@ -12,6 +12,7 @@
 namespace App\Twig;
 
 use Symfony\Component\Intl\Locales;
+use Twig\Attribute\AsTwigFilter;
 use Twig\Attribute\AsTwigFunction;
 
 /**
@@ -69,5 +70,11 @@ final class AppExtension
         $locale ??= $this->defaultLocale;
 
         return \in_array($locale, ['ar', 'fa', 'he', 'ur', 'ps', 'sd'], true);
+    }
+
+    #[AsTwigFilter('filtered_product')]
+    public function filterProductName(string $name): string
+    {
+        return $name.' filtered_product';
     }
 }
