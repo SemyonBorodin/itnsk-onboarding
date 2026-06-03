@@ -11,13 +11,16 @@
 
 namespace App\Controller;
 
+use App\Dto\CreateProductDto;
 use App\Entity\Product;
 use App\Form\ProductType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Attribute\MapRequestPayload;
 use Symfony\Component\Routing\Attribute\Route;
 
 #[Route('/product')]
@@ -49,6 +52,24 @@ final class ProductController extends AbstractController
             'product' => $product,
             'form' => $form,
         ]);
+    }
+
+    #[Route('/dto', name: 'app_product_create_dto', methods: ['POST'])]
+    public function createFromDto(
+        #[MapRequestPayload(acceptFormat: 'json')]
+        CreateProductDto $dto,
+        EntityManagerInterface $entityManager,
+    ): JsonResponse {
+        $product = new Product();
+        $product->setName($dto->name);
+
+        $entityManager->persist($product);
+        $entityManager->flush();
+
+        return $this->json([
+            'id' => $product->getId(),
+            'name' => $product->getName(),
+        ], Response::HTTP_CREATED);
     }
 
     #[Route('/{id}', name: 'app_product_show', methods: ['GET'])]
