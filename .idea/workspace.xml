@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8fe808ae-0d5c-4156-a55f-cd7c3e11832a" name="Changes" comment="symfony documentation: routing">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/TestBlogController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/TestBlogController.php" afterDir="false" />
-    </list>
+    <list default="true" id="8fe808ae-0d5c-4156-a55f-cd7c3e11832a" name="Changes" comment="symfony documentation: routing" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -220,6 +217,7 @@
       <workItem from="1780386813224" duration="1553000" />
       <workItem from="1780388461489" duration="2200000" />
       <workItem from="1780390687617" duration="8749000" />
+      <workItem from="1780461888278" duration="982000" />
     </task>
     <task id="LOCAL-00001" summary="setup and lucky page from 'creating pages' from symfony documentation: LuckyController and twig template">
       <option name="closed" value="true" />

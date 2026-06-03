@@ -28,8 +28,9 @@ class TestBlogController extends AbstractController
 
         if (!isset($blog_list[$item])) {
 //            return new Response('Not found', 404);
-            $url = $this->generateUrl('blog_item', ['item' => 0]);
-            return new RedirectResponse($url);
+//            $url = $this->generateUrl('blog_item', ['item' => 0]);
+//            return new RedirectResponse($url);
+            return $this->redirectToRoute('blog_item', ['item' => 0], Response::HTTP_MOVED_PERMANENTLY); // redirect из symfony helper-a
         }
 
         return new Response(
