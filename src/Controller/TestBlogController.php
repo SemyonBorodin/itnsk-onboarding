@@ -1,6 +1,7 @@
 <?php
 namespace App\Controller;
 
+use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -22,10 +23,10 @@ class TestBlogController extends AbstractController
 //        requirements: ['item' => '[0-9]+'],
         methods: ['GET'],
         locale: 'en')]
-    public function item(int $item = 0): Response
+    public function item(int $item = 0, LoggerInterface $logger): Response
     {
         $blog_list = ['blog1', 'blog2'];
-
+        $logger->info('We are logging!');
         if (!isset($blog_list[$item])) {
 //            return new Response('Not found', 404);
 //            $url = $this->generateUrl('blog_item', ['item' => 0]);
