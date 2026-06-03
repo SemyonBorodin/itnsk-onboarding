@@ -9,6 +9,8 @@
     {% if submittedProductName == 'bread' %}
         <div class="alert alert-warning">
             Twig noticed that you tried to add bread. bread is prohibited product for some reason.
+            <br />
+            {{ submittedProductName|upper }} - bread made 'upper' and its length equals: {{ submittedProductName|length }}.
         </div>
     {% endif %}
 
