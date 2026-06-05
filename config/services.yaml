@@ -19,5 +19,7 @@ services:
     App\:
         resource: '../src/'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    admin.publication:
+        class: App\Admin\PublicationAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Publication, manager_type: orm, label: Publications } // todo добавить adminpostcontroller

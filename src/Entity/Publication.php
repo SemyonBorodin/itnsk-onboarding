@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PublicationRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Publication
 {
     #[ORM\Id]
@@ -107,5 +108,25 @@ class Publication
         $this->publishedAt = $publishedAt;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue(): void
+    {
+        $now = new \DateTimeImmutable();
+        $this->createdAt = $now;
+        $this->updatedAt = $now;
+    }
+
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable();
+    }
+
+    public function isPublished(): bool
+    {
+        return $this->publishedAt !== null
+            && $this->publishedAt <= new \DateTimeImmutable();
     }
 }
