@@ -8,18 +8,26 @@ doctrine:
 
         profiling_collect_backtrace: '%kernel.debug%'
     orm:
-        validate_xml_mapping: true
-        naming_strategy: doctrine.orm.naming_strategy.underscore
-        identity_generation_preferences:
-            Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
-        auto_mapping: true
-        mappings:
-            App:
-                type: attribute
-                is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+        entity_managers:
+            default:
+                validate_xml_mapping: true
+                naming_strategy: doctrine.orm.naming_strategy.underscore
+                identity_generation_preferences:
+                    Doctrine\DBAL\Platforms\PostgreSQLPlatform: identity
+                auto_mapping: true
+                mappings:
+                    App:
+                        type: attribute
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/src/Entity'
+                        prefix: 'App\Entity'
+                        alias: App
+                    SonataUserBundle:
+                        type: xml
+                        is_bundle: false
+                        dir: '%kernel.project_dir%/config/doctrine/sonata_user'
+                        prefix: 'Sonata\UserBundle\Entity'
+                        alias: SonataUserBundle
 
 when@test:
     doctrine:
