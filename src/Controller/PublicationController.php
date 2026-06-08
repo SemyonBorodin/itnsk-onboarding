@@ -38,7 +38,7 @@ final class PublicationController extends AbstractController
 
             return $this->redirectToRoute('app_home');
         }
-        // при первом открытии страницы либо при ошибках формы?
+
         return $this->render('publication/create.html.twig', [
             'form' => $form,
         ]);
