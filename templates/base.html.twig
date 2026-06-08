@@ -22,7 +22,16 @@
 </header>
 
 <main>
-    {% block body %}{% endblock %}
+    {% block body %}
+
+        {% if app.user %}
+            <a href="{{ path('app_publication_create') }}">
+                Создать публикацию
+            </a>
+        {% endif %}
+
+    {% endblock %}
+
 </main>
 
 <footer>
