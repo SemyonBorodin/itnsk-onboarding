@@ -5,7 +5,10 @@ security:
 
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        app_user_provider:
+            entity:
+                class: App\Entity\SonataUserUser
+                property: email
 
     firewalls:
         dev:
@@ -16,13 +19,12 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
-                login_path: app_login
-                check_path: app_login
+                login_path: sonata_user_admin_security_login
+                check_path: sonata_user_admin_security_check
                 enable_csrf: true
             logout:
-                path: app_logout
-                # where to redirect after logout
-                # target: app_any_route
+                path: sonata_user_admin_security_logout
+                target: sonata_user_admin_security_login
 
             # Activate different ways to authenticate:
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -33,8 +35,10 @@ security:
     # Note: Only the *first* matching rule is applied
     access_control:
         - { path: ^/admin/login$, roles: PUBLIC_ACCESS }
+        - { path: ^/admin/login_check$, roles: PUBLIC_ACCESS }
         - { path: ^/admin/logout$, roles: PUBLIC_ACCESS }
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/admin/resetting, roles: PUBLIC_ACCESS }
+        - { path: ^/admin, roles: ROLE_ADMIN }
         # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
