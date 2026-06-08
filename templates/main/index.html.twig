@@ -9,7 +9,15 @@
         Welcome to блог на Symfony.
     </p>
 
-    <p>
-        Здесь будут находиться публикации.
-    </p>
+    {% for publication in publications %}
+        <article>
+            <h2>{{ publication.title }}</h2>
+            <p>{{ publication.content }}</p>
+            <small>
+                {{ publication.createdAt|date('d.m.Y H:i') }}
+            </small>
+        </article>
+    {% else %}
+        <p>Публикаций нет.</p>
+    {% endfor %}
 {% endblock %}
