@@ -5,9 +5,10 @@ namespace App\Entity;
 use App\Repository\PublicationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: PublicationRepository::class)]
-#[ORM\HasLifecycleCallbacks]
+#[ORM\Table(name: 'app__publication')]
 class Publication
 {
     #[ORM\Id]
@@ -15,19 +16,25 @@ class Publication
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $author = null;
+
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
     #[ORM\Column(length: 255, unique: true)]
-    private ?string $slug = null; // уникальный человекочитаемый ключ для пользователя
+    private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $content = null;
 
-    #[ORM\Column]
+    #[Gedmo\Timestampable(on: 'create')]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\Column(nullable: true)]
+    #[Gedmo\Timestampable(on: 'update')]
+    #[ORM\Column(type: Types::DATETIME_IMMUTABLE)]
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -36,6 +43,18 @@ class Publication
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getAuthor(): ?User
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(User $author): static
+    {
+        $this->author = $author;
+
+        return $this;
     }
 
     public function getTitle(): ?string
@@ -108,20 +127,6 @@ class Publication
         $this->publishedAt = $publishedAt;
 
         return $this;
-    }
-
-    #[ORM\PrePersist]
-    public function setCreatedAtValue(): void
-    {
-        $now = new \DateTimeImmutable();
-        $this->createdAt = $now;
-        $this->updatedAt = $now;
-    }
-
-    #[ORM\PreUpdate]
-    public function setUpdatedAtValue(): void
-    {
-        $this->updatedAt = new \DateTimeImmutable();
     }
 
     public function isPublished(): bool

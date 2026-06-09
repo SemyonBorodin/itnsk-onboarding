@@ -1,7 +1,7 @@
 sonata_user:
     class:
-        user: App\Entity\SonataUserUser
+        user: App\Entity\User
     resetting:
         email:
-            address: sonata@localhost
+            address: sonata@localhost // todo протестить с реальным email
             sender_name: Sonata Admin

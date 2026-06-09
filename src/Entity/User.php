@@ -8,8 +8,8 @@ use Doctrine\ORM\Mapping as ORM;
 
 
 #[ORM\Entity]
-#[ORM\Table(name: 'user__user')]
-class SonataUserUser extends BaseUser
+#[ORM\Table(name: 'app__user')]
+class User extends BaseUser
 {
     #[ORM\Id]
     #[ORM\Column(type: Types::INTEGER)]

@@ -16,6 +16,11 @@
             <small>
                 {{ publication.createdAt|date('d.m.Y H:i') }}
             </small>
+            {% if app.user and (publication.author == app.user or is_granted('ROLE_ADMIN')) %}
+                <a href="{{ path('app_publication_update', {id: publication.id}) }}">
+                    Редактировать
+                </a>
+            {% endif %}
         </article>
     {% else %}
         <p>Публикаций нет.</p>

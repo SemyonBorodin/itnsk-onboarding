@@ -18,19 +18,18 @@
     <nav>
         <a href="{{ path('app_home') }}">Блог</a>
         <a href="{{ path('app_about') }}">О блоге</a>
+        {% if app.user %}
+            <a href="{{ path('app_publication_create') }}">Создать публикацию</a>
+            <span>{{ app.user.userIdentifier }}</span>
+            <a href="{{ path('app_logout') }}">Выйти</a>
+        {% else %}
+            <a href="{{ path('app_login') }}">Войти</a>
+        {% endif %}
     </nav>
 </header>
 
 <main>
-    {% block body %}
-
-        {% if app.user %}
-            <a href="{{ path('app_publication_create') }}">
-                Создать публикацию
-            </a>
-        {% endif %}
-
-    {% endblock %}
+    {% block body %}{% endblock %}
 
 </main>
 

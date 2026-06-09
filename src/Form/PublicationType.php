@@ -15,7 +15,6 @@ class PublicationType extends AbstractType
             ->add('title')
             ->add('slug')
             ->add('content')
-            ->add('createdAt')
             ->add('publishedAt', null, [
                 'widget' => 'single_text',
             ])

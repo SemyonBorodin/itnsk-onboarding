@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Publication;
+use App\Entity\User;
 use App\Form\PublicationType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +28,48 @@ final class PublicationController extends AbstractController
         Request $request,
         EntityManagerInterface $entityManager
     ): Response {
+        $user = $this->getUser();
+
+        if (!$user instanceof User) {
+            throw $this->createAccessDeniedException(
+                'Создавать публикации может только пользователь из базы данных.'
+            );
+        }
+
         $publication = new Publication();
+        $publication->setAuthor($user);
+
+        return $this->form($request, $entityManager, $publication);
+    }
+
+    #[Route('/publication/{id}/update', name: 'app_publication_update', requirements: ['id' => '\d+'])]
+    #[IsGranted('ROLE_USER')]
+    public function update(
+        Publication $publication,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+        $user = $this->getUser();
+        $isAuthor = $user instanceof User
+            && $publication->getAuthor()?->getId() === $user->getId();
+
+        if (!$isAuthor && !$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException(
+                'Редактировать публикацию может только её автор.'
+            );
+        }
+
+        return $this->form($request, $entityManager, $publication);
+    }
+
+    private function form(
+        Request $request,
+        EntityManagerInterface $entityManager,
+        Publication $publication
+    ): Response {
+        $title = $publication->getId() === null
+            ? 'Новая публикация'
+            : 'Редактирование публикации';
 
         $form = $this->createForm(PublicationType::class, $publication);
         $form->handleRequest($request);
@@ -39,8 +81,9 @@ final class PublicationController extends AbstractController
             return $this->redirectToRoute('app_home');
         }
 
-        return $this->render('publication/create.html.twig', [
+        return $this->render('publication/form.html.twig', [
             'form' => $form,
+            'title' => $title,
         ]);
     }
 }
