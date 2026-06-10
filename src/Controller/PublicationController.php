@@ -94,7 +94,13 @@ final class PublicationController extends AbstractController
             $entityManager->persist($publication);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Публикация сохранена!');
+
             return $this->redirectToRoute('app_home');
+        }
+
+        if ($form->isSubmitted()) {
+            $this->addFlash('warning', 'Проверьте введённые данные.');
         }
 
         return $this->render('publication/form.html.twig', [

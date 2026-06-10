@@ -6,9 +6,15 @@ use App\Repository\PublicationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[ORM\Entity(repositoryClass: PublicationRepository::class)]
 #[ORM\Table(name: 'app__publication')]
+#[UniqueEntity(
+    fields: ['slug'],
+    message: 'Публикация с таким slug уже существует.',
+    errorPath: 'slug',
+)]
 class Publication
 {
     #[ORM\Id]
