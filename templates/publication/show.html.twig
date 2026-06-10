@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ publication.title }} | Symfony Blog{% endblock %}
+{% block description %}{{ publication.content|striptags|slice(0, 160) }}{% endblock %}
+
+{% block body %}
+    <section class="content-section">
+        <div class="container content-grid">
+            <article class="post-single">
+                <div class="post-meta">
+                    <span class="badge">
+                        {{ publication.isPublished ? 'Опубликовано' : 'Черновик' }}
+                    </span>
+                    <time datetime="{{ publication.createdAt|date('c') }}">
+                        {{ publication.createdAt|date('d.m.Y H:i') }}
+                    </time>
+                    {% if publication.author %}
+                        <span>{{ publication.author.userIdentifier }}</span>
+                    {% endif %}
+                </div>
+
+                <h1>{{ publication.title }}</h1>
+                <div class="post-content">{{ publication.content }}</div>
+
+                <div class="post-actions">
+                    <a class="btn btn-outline" href="{{ path('app_home') }}">
+                        К списку
+                    </a>
+                    {% if app.user and (publication.author == app.user or is_granted('ROLE_ADMIN')) %}
+                        <a class="btn btn-primary" href="{{ path('app_publication_update', {id: publication.id}) }}">
+                            Редактировать
+                        </a>
+                    {% endif %}
+                </div>
+            </article>
+
+            {% include 'publication/_sidebar.html.twig' with {
+                sidebar_publications: sidebar_publications
+            } only %}
+        </div>
+    </section>
+{% endblock %}

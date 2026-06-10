@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Publication;
 use App\Entity\User;
 use App\Form\PublicationType;
+use App\Repository\PublicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,6 +20,21 @@ final class PublicationController extends AbstractController
     {
         return $this->render('publication/index.html.twig', [
             'controller_name' => 'PublicationController',
+        ]);
+    }
+
+    #[Route('/blog/{id}', name: 'app_publication_show', requirements: ['id' => '\d+'])]
+    public function show(
+        Publication $publication,
+        PublicationRepository $publicationRepository
+    ): Response {
+        return $this->render('publication/show.html.twig', [
+            'publication' => $publication,
+            'sidebar_publications' => $publicationRepository->findBy(
+                [],
+                ['createdAt' => 'DESC'],
+                5
+            ),
         ]);
     }
 

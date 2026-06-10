@@ -1,40 +1,52 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>{% block title %}Блог{% endblock %}</title>
-
-    {% block stylesheets %}{% endblock %}
-
-    {% block javascripts %}
-        {% block importmap %}{{ importmap('app') }}{% endblock %}
+    <meta name="description" content="{% block description %}Блог{% endblock %}">
+    <link rel="icon" href="{{ asset('silicon/img/logo.svg') }}" type="image/svg+xml">
+    {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('silicon/css/theme.css') }}">
     {% endblock %}
 </head>
 <body>
-<header>
-    <nav>
-        <a href="{{ path('app_home') }}">Блог</a>
-        <a href="{{ path('app_about') }}">О блоге</a>
-        {% if app.user %}
-            <a href="{{ path('app_publication_create') }}">Создать публикацию</a>
-            <span>{{ app.user.userIdentifier }}</span>
-            <a href="{{ path('app_logout') }}">Выйти</a>
-        {% else %}
-            <a href="{{ path('app_login') }}">Войти</a>
-        {% endif %}
-    </nav>
+<header class="navbar">
+    <div class="container navbar-inner">
+        <a class="navbar-brand" href="{{ path('app_home') }}">
+            <img src="{{ asset('silicon/img/logo.svg') }}" alt="">
+            Блог
+        </a>
+
+        <nav class="navbar-nav" aria-label="Основная навигация">
+            <a href="{{ path('app_home') }}">Публикации</a>
+            <a href="{{ path('app_about') }}">О блоге</a>
+            {% if app.user %}
+                <a class="btn btn-primary" href="{{ path('app_publication_create') }}">
+                    Создать публикацию
+                </a>
+                <span class="navbar-user">{{ app.user.userIdentifier }}</span>
+                <a href="{{ path('app_logout') }}">Выйти</a>
+            {% else %}
+                <a class="btn btn-outline" href="{{ path('app_login') }}">Войти</a>
+            {% endif %}
+        </nav>
+    </div>
 </header>
 
-<main>
+<main class="page-wrapper">
     {% block body %}{% endblock %}
-
 </main>
 
-<footer>
-    <p>&copy; {{ 'now'|date('Y') }} Блог</p>
+<footer class="footer">
+    <div class="container footer-inner">
+        <strong>Блог</strong>
+        <span>&copy; <span data-current-year>{{ 'now'|date('Y') }}</span></span>
+    </div>
 </footer>
+
+{% block javascripts %}
+    <script src="{{ asset('silicon/js/theme.js') }}"></script>
+{% endblock %}
 </body>
 </html>

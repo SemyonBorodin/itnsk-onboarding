@@ -3,13 +3,16 @@
 {% block title %}О блоге{% endblock %}
 
 {% block body %}
-    <h1>О блоге</h1>
-
-    <p>
-        Это блог написанный на Symfony, Twig, БД MySqL.
-    </p>
-
-    <p>
-        Блог info.
-    </p>
+    <section class="content-section">
+        <div class="container">
+            <article class="post-single">
+                <span class="badge">О проекте</span>
+                <h1>О блоге</h1>
+                <p class="post-content">
+                    Это блог написанный на Symfony, Twig, БД MySql.
+                </p>
+                <p>Блог info.</p>
+            </article>
+        </div>
+    </section>
 {% endblock %}
