@@ -5,16 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Блог{% endblock %}</title>
     <meta name="description" content="{% block description %}Блог{% endblock %}">
-    <link rel="icon" href="{{ asset('silicon/img/logo.svg') }}" type="image/svg+xml">
     {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('silicon/css/theme.css') }}">
     {% endblock %}
 </head>
 <body>
 <header class="navbar">
     <div class="container navbar-inner">
         <a class="navbar-brand" href="{{ path('app_home') }}">
-            <img src="{{ asset('silicon/img/logo.svg') }}" alt="">
             Блог
         </a>
 
@@ -54,7 +51,6 @@
 </footer>
 
 {% block javascripts %}
-    <script src="{{ asset('silicon/js/theme.js') }}"></script>
 {% endblock %}
 </body>
 </html>
