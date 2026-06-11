@@ -7,6 +7,7 @@ use App\Entity\User;
 use App\Form\PublicationType;
 use App\Repository\PublicationRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Doctrine\Attribute\MapEntity;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -39,10 +40,13 @@ final class PublicationController extends AbstractController
     }
 
     #[Route('/publication/create', name: 'app_publication_create')]
+    #[Route('/publication/{id}/update', name: 'app_publication_update', requirements: ['id' => '\d+'])]
     #[IsGranted('ROLE_USER')]
-    public function create(
+    public function form(
         Request $request,
-        EntityManagerInterface $entityManager
+        EntityManagerInterface $entityManager,
+        #[MapEntity(id: 'id')]
+        ?Publication $publication = null
     ): Response {
         $user = $this->getUser();
 
@@ -52,38 +56,20 @@ final class PublicationController extends AbstractController
             );
         }
 
-        $publication = new Publication();
-        $publication->setAuthor($user);
+        $isNew = $publication === null;
 
-        return $this->form($request, $entityManager, $publication);
-    }
-
-    #[Route('/publication/{id}/update', name: 'app_publication_update', requirements: ['id' => '\d+'])]
-    #[IsGranted('ROLE_USER')]
-    public function update(
-        Publication $publication,
-        Request $request,
-        EntityManagerInterface $entityManager
-    ): Response {
-        $user = $this->getUser();
-        $isAuthor = $user instanceof User
-            && $publication->getAuthor()?->getId() === $user->getId();
-
-        if (!$isAuthor && !$this->isGranted('ROLE_ADMIN')) {
+        if ($isNew) {
+            $publication = (new Publication())->setAuthor($user);
+        } elseif (
+            $publication->getAuthor()?->getId() !== $user->getId()
+            && !$this->isGranted('ROLE_ADMIN')
+        ) {
             throw $this->createAccessDeniedException(
                 'Редактировать публикацию может только её автор.'
             );
         }
 
-        return $this->form($request, $entityManager, $publication);
-    }
-
-    private function form(
-        Request $request,
-        EntityManagerInterface $entityManager,
-        Publication $publication
-    ): Response {
-        $title = $publication->getId() === null
+        $title = $isNew
             ? 'Новая публикация'
             : 'Редактирование публикации';
 
