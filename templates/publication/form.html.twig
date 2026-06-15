@@ -23,6 +23,10 @@
                     label: 'Содержание',
                     attr: {class: 'form-control', rows: 10}
                 }) }}
+                {{ form_row(form.category, {
+                    label: 'Категория',
+                    attr: {class: 'form-select'}
+                }) }}
                 {{ form_row(form.publishedAt, {
                     label: 'Дата публикации',
                     attr: {class: 'form-control'}

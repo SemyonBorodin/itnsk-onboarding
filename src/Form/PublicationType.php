@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Category;
 use App\Entity\Publication;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,6 +17,12 @@ class PublicationType extends AbstractType
             ->add('title')
             ->add('slug')
             ->add('content')
+            ->add('category', EntityType::class, [
+                'class' => Category::class,
+                'choice_label' => 'name',
+                'placeholder' => 'Выберите категорию',
+                'required' => true,
+            ])
             ->add('publishedAt', null, [
                 'widget' => 'single_text',
             ])

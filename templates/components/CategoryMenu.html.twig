@@ -1,0 +1,15 @@
+<section class="card card-body mb-4">
+    <h3 class="h5">Категории</h3>
+
+    <ul class="nav flex-column fs-sm">
+        {% for category in this.categories %}
+            <li class="nav-item">
+                <span class="nav-link py-1 px-0">
+                    {{ category.name }}
+                </span>
+            </li>
+        {% else %}
+            <li>Категорий пока нет.</li>
+        {% endfor %}
+    </ul>
+</section>
