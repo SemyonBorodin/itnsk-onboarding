@@ -1,4 +1,9 @@
 <div>
+    {# cтарый подход через саб-реквест#}
+    {{ render(controller(
+        'App\\Controller\\CounterController::show'
+    )) }}
+
     <section class="card card-body mb-4">
         <h3 class="h5">О блоге</h3>
         <p class="mb-0">Sample text 1.</p>
