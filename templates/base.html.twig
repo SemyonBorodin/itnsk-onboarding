@@ -9,6 +9,44 @@
         <link rel="stylesheet" href="{{ asset('silicon/css/theme.min.css') }}">
         <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
     {% endblock %}
+
+    <link
+        rel="apple-touch-icon"
+        sizes="180x180"
+        href="{{ asset('silicon/favicon/apple-touch-icon.png') }}"
+    >
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="{{ asset('silicon/favicon/favicon-32x32.png') }}"
+    >
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="{{ asset('silicon/favicon/favicon-16x16.png') }}"
+    >
+    <link
+        rel="manifest"
+        href="{{ asset('silicon/favicon/site.webmanifest') }}"
+    >
+    <link
+        rel="mask-icon"
+        href="{{ asset('silicon/favicon/safari-pinned-tab.svg') }}"
+        color="#6366f1"
+    >
+    <link
+        rel="shortcut icon"
+        href="{{ asset('silicon/favicon/favicon.ico') }}"
+    >
+    <meta name="msapplication-TileColor" content="#080032">
+    <meta
+        name="msapplication-config"
+        content="{{ asset('silicon/favicon/browserconfig.xml') }}"
+    >
+    <meta name="theme-color" content="#ffffff">
+
 </head>
 <body>
 <header class="header navbar navbar-expand-lg bg-light shadow-sm shadow-dark-mode-none fixed-top">
@@ -81,10 +119,16 @@
     {% block body %}{% endblock %}
 </main>
 
-<footer class="footer">
-    <div class="container footer-inner">
-        <strong>Блог</strong>
-        <span>&copy; <span data-current-year>{{ 'now'|date('Y') }}</span></span>
+<footer class="footer bg-dark pt-5 pb-4 pb-lg-5" data-bs-theme="dark">
+    <div class="container pt-lg-4">
+        <div class="navbar-brand text-dark p-0 me-0 mb-3 mb-lg-4">
+            Блог
+        </div>
+
+        <p class="nav d-block fs-xs text-center text-md-start pb-5 pb-lg-0 mb-0">
+              <span class="text-light opacity-50"> &copy; {{ 'now'|date('Y') }} Блог
+              </span>
+        </p>
     </div>
 </footer>
 
