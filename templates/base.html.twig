@@ -55,7 +55,6 @@
             Блог
         </a>
 
-        {# Это как я понял для мобильного меню, заработает после подключения theme.min.js. #}
         <button
             class="navbar-toggler"
             type="button"
@@ -133,6 +132,7 @@
 </footer>
 
 {% block javascripts %}
+    <script src="{{ asset('silicon/js/theme.min.js') }}"></script>
 {% endblock %}
 </body>
 </html>
