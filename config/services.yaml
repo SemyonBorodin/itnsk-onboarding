@@ -22,4 +22,9 @@ services:
     admin.publication:
         class: App\Admin\PublicationAdmin
         tags:
-            - { name: sonata.admin, model_class: App\Entity\Publication, manager_type: orm, label: Publications } #todo добавить adminpostcontroller
+            - { name: sonata.admin, model_class: App\Entity\Publication, manager_type: orm, group: Блог, label: Публикации }
+
+    admin.category:
+        class: App\Admin\CategoryAdmin
+        tags:
+            - { name: sonata.admin, model_class: App\Entity\Category, manager_type: orm, group: Блог, label: Категории }

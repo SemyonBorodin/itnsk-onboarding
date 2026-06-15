@@ -4,9 +4,14 @@
     <ul class="nav flex-column fs-sm">
         {% for category in this.categories %}
             <li class="nav-item">
-                <span class="nav-link py-1 px-0">
+                <a
+                    class="nav-link py-1 px-0"
+                    href="{{ path('app_category_show', {
+                        slug: category.slug
+                    }) }}"
+                >
                     {{ category.name }}
-                </span>
+                </a>
             </li>
         {% else %}
             <li>Категорий пока нет.</li>

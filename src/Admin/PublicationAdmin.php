@@ -15,6 +15,7 @@ class PublicationAdmin extends AbstractAdmin
             ->add('title')
             ->add('slug')
             ->add('content')
+            ->add('category')
             ->add('publishedAt');
     }
 
@@ -23,6 +24,7 @@ class PublicationAdmin extends AbstractAdmin
         $list
             ->addIdentifier('title')
             ->add('slug')
+            ->add('category')
             ->add('publishedAt')
         ;
     }
@@ -34,6 +36,7 @@ class PublicationAdmin extends AbstractAdmin
             ->add('title')
             ->add('slug')
             ->add('content')
+            ->add('category')
             ->add('publishedAt')
         ;
     }
