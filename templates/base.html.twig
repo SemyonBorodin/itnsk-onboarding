@@ -6,27 +6,65 @@
     <title>{% block title %}Блог{% endblock %}</title>
     <meta name="description" content="{% block description %}Блог{% endblock %}">
     {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('silicon/css/theme.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('styles/app.css') }}">
     {% endblock %}
 </head>
 <body>
-<header class="navbar">
-    <div class="container navbar-inner">
-        <a class="navbar-brand" href="{{ path('app_home') }}">
+<header class="header navbar navbar-expand-lg bg-light shadow-sm shadow-dark-mode-none fixed-top">
+    <div class="container px-3">
+        <a class="navbar-brand pe-3" href="{{ path('app_home') }}">
             Блог
         </a>
 
-        <nav class="navbar-nav" aria-label="Основная навигация">
-            <a href="{{ path('app_home') }}">Публикации</a>
-            <a href="{{ path('app_about') }}">О блоге</a>
-            {% if app.user %}
-                <a class="btn btn-primary" href="{{ path('app_publication_create') }}">
-                    Создать публикацию
-                </a>
-                <span class="navbar-user">{{ app.user.userIdentifier }}</span>
-                <a href="{{ path('app_logout') }}">Выйти</a>
-            {% else %}
-                <a class="btn btn-outline" href="{{ path('app_login') }}">Войти</a>
-            {% endif %}
+        {# Это как я понял для мобильного меню, заработает после подключения theme.min.js. #}
+        <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Открыть меню"
+        >
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <nav class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_home') }}">
+                        Публикации
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('app_about') }}">
+                        О блоге
+                    </a>
+                </li>
+            </ul>
+
+            <div class="d-flex align-items-center gap-3">
+                {% if app.user %}
+                    <a
+                        class="btn btn-primary"
+                        href="{{ path('app_publication_create') }}"
+                    >
+                        Создать публикацию
+                    </a>
+
+                    <span>{{ app.user.userIdentifier }}</span>
+
+                    <a class="nav-link" href="{{ path('app_logout') }}">
+                        Выйти
+                    </a>
+                {% else %}
+                    <a class="btn btn-outline-primary" href="{{ path('app_login') }}">
+                        Войти
+                    </a>
+                {% endif %}
+            </div>
         </nav>
     </div>
 </header>

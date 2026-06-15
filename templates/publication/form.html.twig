@@ -3,16 +3,34 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block body %}
-    <section class="container">
-        <div class="form-card">
-            <span class="badge">Редактор</span>
-            <h1>{{ title }}</h1>
+    {# обернули в card и назначили полям классы Silicon. #}
+    <section class="container pb-5">
+        <div class="card card-body mx-auto" style="max-width: 48rem;">
+            <span class="badge bg-primary align-self-start mb-3">Редактор</span>
+            <h1 class="h2">{{ title }}</h1>
 
             {{ form_start(form) }}
-                {{ form_widget(form) }}
-                <div class="post-actions">
+                {# form_row рисует label, ошибки и input #}
+                {{ form_row(form.title, {
+                    label: 'Название',
+                    attr: {class: 'form-control'}
+                }) }}
+                {{ form_row(form.slug, {
+                    label: 'Slug',
+                    attr: {class: 'form-control'}
+                }) }}
+                {{ form_row(form.content, {
+                    label: 'Содержание',
+                    attr: {class: 'form-control', rows: 10}
+                }) }}
+                {{ form_row(form.publishedAt, {
+                    label: 'Дата публикации',
+                    attr: {class: 'form-control'}
+                }) }}
+
+                <div class="d-flex gap-2 mt-4">
                     <button class="btn btn-primary" type="submit">Сохранить</button>
-                    <a class="btn btn-outline" href="{{ path('app_home') }}">Отмена</a>
+                    <a class="btn btn-outline-primary" href="{{ path('app_home') }}">Отмена: На главную</a>
                 </div>
             {{ form_end(form) }}
         </div>

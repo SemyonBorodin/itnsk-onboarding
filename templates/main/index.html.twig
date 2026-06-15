@@ -3,68 +3,93 @@
 {% block title %}Главная страница блога{% endblock %}
 
 {% block body %}
-    <section class="hero">
-        <div class="container">
-            <div class="hero-kicker">Блог</div>
-            <h1>Главная страница блога</h1>
-            <p>Welcome to блог на Symfony.</p>
-            <p>
-                Посещений в этой сессии: {{ session_visits }}.
-                Посещений с этого браузера: {{ total_visits }}.
-            </p>
-        </div>
-    </section>
-
     <section class="content-section">
-        <div class="container content-grid">
-            <div class="post-list">
-                {% for publication in publications %}
-                    <article class="post-card">
-                        <div class="post-meta">
-                            <span class="badge">
-                                {{ publication.isPublished ? 'Опубликовано' : 'Черновик' }}
-                            </span>
-                            <time datetime="{{ publication.createdAt|date('c') }}">
-                                {{ publication.createdAt|date('d.m.Y') }}
-                            </time>
-                            {% if publication.author %}
-                                <span>{{ publication.author.userIdentifier }}</span>
-                            {% endif %}
+        <div class="container">
+            <h1 class="mb-4">Публикации</h1>
+
+            {# row делит страницу на колонки, список занимает 9/12 или 8/12 ширины #}
+            <div class="row">
+                <div class="col-xl-9 col-lg-8">
+                    {% for publication in publications %}
+                        <article class="card me-xl-5 mb-4">
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <span class="badge bg-primary">
+                                        {{ publication.isPublished
+                                            ? 'Опубликовано'
+                                            : 'Черновик'
+                                        }}
+                                    </span>
+                                </div>
+
+                                <h2 class="h4">
+                                    <a href="{{ path('app_publication_show', {
+                                        id: publication.id
+                                    }) }}">
+                                        {{ publication.title }}
+                                    </a>
+                                </h2>
+
+                                <p class="mb-4">
+                                    {% set content = publication.content|striptags %}
+
+                                    {{ content|slice(0, 220) }}
+                                    {% if content|length > 220 %}...{% endif %}
+                                </p>
+
+                                <div class="d-flex align-items-center text-muted mb-3">
+                                    <div class="fs-sm border-end pe-3 me-3">
+                                        {{ publication.createdAt|date('d.m.Y') }}
+                                    </div>
+
+                                    {% if publication.author %}
+                                        <div class="fs-sm">
+                                            {{ publication.author.userIdentifier }}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <a
+                                        class="btn btn-primary"
+                                        href="{{ path('app_publication_show', {
+                                            id: publication.id
+                                        }) }}"
+                                    >
+                                        Читать
+                                    </a>
+
+                                    {% if app.user and ( publication.author == app.user
+                                        or is_granted('ROLE_ADMIN')
+                                    ) %}
+                                        <a class="btn btn-outline-primary"
+                                           href="{{ path('app_publication_update', {
+                                                id: publication.id
+                                            }) }}"
+                                        >
+                                            Редактировать
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </article>
+                    {% else %}
+                        <div class="alert alert-info">
+                            <h2 class="h4">Публикаций пока нет</h2>
+                            <p class="mb-0">
+                                Первая публикация появится здесь после создания.
+                            </p>
                         </div>
+                    {% endfor %}
+                </div>
 
-                        <h2>
-                            <a href="{{ path('app_publication_show', {id: publication.id}) }}">
-                                {{ publication.title }}
-                            </a>
-                        </h2>
-
-                        <p class="post-excerpt">
-                            {{ publication.content|striptags|slice(0, 220) }}
-                            {% if publication.content|length > 220 %}...{% endif %}
-                        </p>
-
-                        <div class="post-actions">
-                            <a class="btn btn-primary" href="{{ path('app_publication_show', {id: publication.id}) }}">
-                                Читать
-                            </a>
-                            {% if app.user and (publication.author == app.user or is_granted('ROLE_ADMIN')) %}
-                                <a class="btn btn-outline" href="{{ path('app_publication_update', {id: publication.id}) }}">
-                                    Редактировать
-                                </a>
-                            {% endif %}
-                        </div>
-                    </article>
-                {% else %}
-                    <div class="empty-state">
-                        <h2>Публикаций пока нет</h2>
-                        <p>Первая публикация появится здесь после создания.</p>
-                    </div>
-                {% endfor %}
+                {# sidebar занимает оставшиеся 3/12 или 4/12, контент в отдельном partial #}
+                <aside class="col-xl-3 col-lg-4">
+                    {% include 'publication/_sidebar.html.twig' with {
+                        sidebar_publications: publications|slice(0, 5)
+                    } only %}
+                </aside>
             </div>
-
-            {% include 'publication/_sidebar.html.twig' with {
-                sidebar_publications: publications|slice(0, 5)
-            } only %}
         </div>
     </section>
 {% endblock %}

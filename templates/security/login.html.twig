@@ -3,24 +3,25 @@
 {% block title %}Вход{% endblock %}
 
 {% block body %}
-    <section class="container">
-        <div class="login-card">
-            <span class="badge">Security</span>
-            <h1>Вход</h1>
+    <section class="container pb-5">
+        <div class="card card-body mx-auto" style="max-width: 32rem;">
+            <span class="badge bg-primary align-self-start mb-3">Security</span>
+            <h1 class="h2">Вход</h1>
 
             {% if error %}
-                <p class="alert" role="alert">
+                <p class="alert alert-danger" role="alert">
                     {{ error.messageKey|trans(error.messageData, 'security') }}
                 </p>
             {% endif %}
 
             <form method="post" action="{{ path('app_login') }}">
-                <div class="form-row">
-                    <label for="username">Email</label>
+                <div class="mb-3">
+                    <label class="form-label" for="username">Email</label>
                     <input
+                        class="form-control"
                         id="username"
                         name="_username"
-                        type="text"
+                        type="email"
                         value="{{ last_username }}"
                         autocomplete="username"
                         required
@@ -28,9 +29,10 @@
                     >
                 </div>
 
-                <div class="form-row">
-                    <label for="password">Пароль</label>
+                <div class="mb-4">
+                    <label class="form-label" for="password">Пароль</label>
                     <input
+                        class="form-control"
                         id="password"
                         name="_password"
                         type="password"

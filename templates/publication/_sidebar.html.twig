@@ -1,22 +1,24 @@
-<aside class="sidebar">
-    <section class="sidebar-card">
-        <h3>О блоге</h3>
-        <p>Sample text 1.</p>
+<div>
+    <section class="card card-body mb-4">
+        <h3 class="h5">О блоге</h3>
+        <p class="mb-0">Sample text 1.</p>
     </section>
 
-    <section class="sidebar-card">
-        <h3>Последние публикации</h3>
-        <ul class="sidebar-list">
+    <section class="card card-body mb-4">
+        <h3 class="h5">Последние публикации</h3>
+        <ul class="list-unstyled mb-0">
             {% for item in sidebar_publications %}
-                <li>
+                <li class="mb-3">
                     <a href="{{ path('app_publication_show', {id: item.id}) }}">
                         {{ item.title }}
                     </a>
-                    <small>{{ item.createdAt|date('d.m.Y') }}</small>
+                    <small class="d-block text-muted">
+                        {{ item.createdAt|date('d.m.Y') }}
+                    </small>
                 </li>
             {% else %}
                 <li>Публикаций пока нет.</li>
             {% endfor %}
         </ul>
     </section>
-</aside>
+</div>
