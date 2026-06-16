@@ -20,7 +20,7 @@
                                     </a>
                                 </h2>
 
-                                {% set content = publication.content|striptags %}
+                                {% set content = publication.content|content_preview %}
 
                                 <p class="mb-4">
                                     {{ content|slice(0, 220) }}

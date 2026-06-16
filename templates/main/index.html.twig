@@ -31,7 +31,7 @@
                                 </h2>
 
                                 <p class="mb-4">
-                                    {% set content = publication.content|striptags %}
+                                    {% set content = publication.content|content_preview %}
 
                                     {{ content|slice(0, 220) }}
                                     {% if content|length > 220 %}...{% endif %}

@@ -2,6 +2,15 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 14rem;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
     {# обернули в card и назначили полям классы Silicon. #}
     <section class="container pb-5">
@@ -9,7 +18,9 @@
             <span class="badge bg-primary align-self-start mb-3">Редактор</span>
             <h1 class="h2">{{ title }}</h1>
 
-            {{ form_start(form) }}
+            {{ form_start(form, {
+                attr: {novalidate: 'novalidate'}
+            }) }}
                 {# form_row рисует label, ошибки и input #}
                 {{ form_row(form.title, {
                     label: 'Название',
@@ -21,7 +32,7 @@
                 }) }}
                 {{ form_row(form.content, {
                     label: 'Содержание',
-                    attr: {class: 'form-control', rows: 10}
+                    attr: {class: 'form-control js-ckeditor', rows: 10}
                 }) }}
                 {{ form_row(form.category, {
                     label: 'Категория',
@@ -39,4 +50,82 @@
             {{ form_end(form) }}
         </div>
     </section>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script>
+        class PublicationImageUploadAdapter {
+            constructor(loader) {
+                this.loader = loader;
+            }
+
+            upload() {
+                return this.loader.file.then((file) => new Promise((resolve, reject) => {
+                    const data = new FormData();
+                    data.append('upload', file);
+
+                    fetch('{{ path('app_publication_image_upload') }}', {
+                        method: 'POST',
+                        body: data
+                    })
+                        .then((response) => response.json())
+                        .then((response) => {
+                            if (response.error) {
+                                reject(response.error.message);
+
+                                return;
+                            }
+
+                            resolve({
+                                default: response.url
+                            });
+                        })
+                        .catch(() => {
+                            reject('Не удалось загрузить изображение.');
+                        });
+                }));
+            }
+        }
+
+        function publicationImageUploadAdapterPlugin(editor) {
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                return new PublicationImageUploadAdapter(loader);
+            };
+        }
+
+        document.querySelectorAll('.js-ckeditor').forEach((element) => {
+            ClassicEditor
+                .create(element, {
+                    extraPlugins: [publicationImageUploadAdapterPlugin],
+                    toolbar: [
+                        'undo',
+                        'redo',
+                        '|',
+                        'bold',
+                        'italic',
+                        '|',
+                        'imageUpload'
+                    ],
+                    image: {
+                        toolbar: [
+                            'imageTextAlternative',
+                            'toggleImageCaption',
+                            'imageStyle:inline',
+                            'imageStyle:block',
+                            'imageStyle:side'
+                        ]
+                    }
+                })
+                .then((editor) => {
+                    element.closest('form')?.addEventListener('submit', () => {
+                        editor.updateSourceElement();
+                    });
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        });
+    </script>
 {% endblock %}
